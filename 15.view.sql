@@ -122,9 +122,28 @@ CREATE OR REPLACE VIEW view_emp_test AS (
 )
 WITH CHECK OPTION CONSTRAINT view_emp_test_ck;
 
+SELECT * FROM view_emp_test;
+DROP VIEW view_emp_test;
 
+UPDATE view_emp_test
+SET department_id = 100
+WHERE employee_id = 107;
 
+-- 읽기 전용 뷰 -> WITH READ ONLY (DML 연산을 막음 -> SELECT만 허용)
 
+CREATE OR REPLACE VIEW view_emp_test AS (
+    SELECT
+        employee_id,
+        first_name,
+        last_name,
+        email,
+        hire_date,
+        job_id,
+        department_id
+    FROM employees
+    WHERE department_id = 60
+)
+WITH READ ONLY;
 
 
 
